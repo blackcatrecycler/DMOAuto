@@ -10,11 +10,33 @@ using System.Windows.Forms;
 
 namespace DMOAuto
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
         }
-    }
+
+        int a = -1;
+
+        private void  ProSearch(object sender, EventArgs e)
+        {
+            try
+            {
+                int pId=lib.ProcessHandler.GetProcess("GDMO.exe");
+                if (pId != -1) { int resp = (int)MessageBox.Show("There is no game process.","ERROR"); }
+
+            }
+            catch(Exception exp)
+            {
+                int resp = (int)MessageBox.Show("Some thing went wrong.", "ERROR");
+            }
+        }
+
+        
+    
+}
+
+    
+
 }
