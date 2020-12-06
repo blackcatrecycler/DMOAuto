@@ -1,6 +1,6 @@
 ﻿namespace DMOAuto
 {
-    partial class MainForm
+    partial class mainForm
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -28,38 +28,134 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.BtnSearchPro = new System.Windows.Forms.Button();
-            this.LblProId = new System.Windows.Forms.Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainForm));
+            this.btnSearchPro = new System.Windows.Forms.Button();
+            this.lblProId = new System.Windows.Forms.Label();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.btnStop = new System.Windows.Forms.Button();
+            this.btnEnter = new System.Windows.Forms.Button();
+            this.txtBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // BtnSearchPro
+            // btnSearchPro
             // 
-            this.BtnSearchPro.Location = new System.Drawing.Point(21, 23);
-            this.BtnSearchPro.Name = "BtnSearchPro";
-            this.BtnSearchPro.Size = new System.Drawing.Size(75, 23);
-            this.BtnSearchPro.TabIndex = 0;
-            this.BtnSearchPro.Text = "寻找进程";
-            this.BtnSearchPro.UseVisualStyleBackColor = true;
+            this.btnSearchPro.Location = new System.Drawing.Point(21, 23);
+            this.btnSearchPro.Name = "btnSearchPro";
+            this.btnSearchPro.Size = new System.Drawing.Size(75, 23);
+            this.btnSearchPro.TabIndex = 0;
+            this.btnSearchPro.Text = "Link Start";
+            this.btnSearchPro.UseVisualStyleBackColor = true;
+            this.btnSearchPro.Click += new System.EventHandler(this.ProSearch);
             // 
-            // LblProId
+            // lblProId
             // 
-            this.LblProId.AutoSize = true;
-            this.LblProId.Location = new System.Drawing.Point(102, 28);
-            this.LblProId.Name = "LblProId";
-            this.LblProId.Size = new System.Drawing.Size(53, 12);
-            this.LblProId.TabIndex = 1;
-            this.LblProId.Text = "暂无进程";
+            this.lblProId.AutoSize = true;
+            this.lblProId.Location = new System.Drawing.Point(102, 28);
+            this.lblProId.Name = "lblProId";
+            this.lblProId.Size = new System.Drawing.Size(53, 12);
+            this.lblProId.TabIndex = 1;
+            this.lblProId.Text = "暂无进程";
             // 
-            // MainForm
+            // btnStart
+            // 
+            this.btnStart.Location = new System.Drawing.Point(21, 67);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(180, 67);
+            this.btnStart.TabIndex = 2;
+            this.btnStart.Text = "Go";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.AllStart);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(104, 180);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "W";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Mody);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(12, 246);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "A";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Mody);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(189, 246);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 5;
+            this.button3.Text = "D";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.Mody);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(104, 314);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 6;
+            this.button4.Text = "S";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.Mody);
+            // 
+            // btnStop
+            // 
+            this.btnStop.Location = new System.Drawing.Point(247, 23);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(75, 23);
+            this.btnStop.TabIndex = 7;
+            this.btnStop.Text = "Stop";
+            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.AllStop);
+            // 
+            // btnEnter
+            // 
+            this.btnEnter.Location = new System.Drawing.Point(104, 246);
+            this.btnEnter.Name = "btnEnter";
+            this.btnEnter.Size = new System.Drawing.Size(75, 23);
+            this.btnEnter.TabIndex = 8;
+            this.btnEnter.Text = "Enter";
+            this.btnEnter.UseVisualStyleBackColor = true;
+            this.btnEnter.Click += new System.EventHandler(this.Mody);
+            // 
+            // txtBox
+            // 
+            this.txtBox.AcceptsReturn = true;
+            this.txtBox.Location = new System.Drawing.Point(438, 139);
+            this.txtBox.Multiline = true;
+            this.txtBox.Name = "txtBox";
+            this.txtBox.Size = new System.Drawing.Size(312, 215);
+            this.txtBox.TabIndex = 9;
+            // 
+            // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(804, 425);
-            this.Controls.Add(this.LblProId);
-            this.Controls.Add(this.BtnSearchPro);
+            this.Controls.Add(this.txtBox);
+            this.Controls.Add(this.btnEnter);
+            this.Controls.Add(this.btnStop);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnStart);
+            this.Controls.Add(this.lblProId);
+            this.Controls.Add(this.btnSearchPro);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "MainForm";
+            this.Name = "mainForm";
             this.Text = "DMOAuto";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -68,8 +164,16 @@
 
         #endregion
 
-        private System.Windows.Forms.Button BtnSearchPro;
-        private System.Windows.Forms.Label LblProId;
+        private System.Windows.Forms.Button btnSearchPro;
+        private System.Windows.Forms.Label lblProId;
+        private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnStop;
+        private System.Windows.Forms.Button btnEnter;
+        private System.Windows.Forms.TextBox txtBox;
     }
 }
 
