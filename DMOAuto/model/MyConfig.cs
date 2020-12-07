@@ -10,10 +10,11 @@ namespace DMOAuto.model
     {
         public bool state { get; set; }
         public int a { get; set; }
-
+        public bool monSelect { get; set; }
         public MyConfig()
         {
             state = false;
+            monSelect = false;
             a = -1;
         }
     }

@@ -15,13 +15,15 @@ namespace DMOAuto
 
     public delegate void Loge(string a);
 
+    public delegate void UpdateBit(Bitmap bt);
+
     public partial class mainForm : Form
     {
         public mainForm()
         {
             InitializeComponent();
             MyInit();
-            
+
         }
 
         Boting bot;
@@ -30,14 +32,16 @@ namespace DMOAuto
 
         public static UpdateMe uPD;
         public static Loge uPL;
+        public static UpdateBit uPB;
 
         private void MyInit()
         {
             lblProId.Text = "Not active";
             lblProId.ForeColor = Color.Red;
-            bot = new Boting();
+            bot = Boting.GetInstance();
             uPD = ChangeLabel;
             uPL = OutLog;
+            uPB = UpdateImg;
         }
 
 
@@ -52,15 +56,32 @@ namespace DMOAuto
             }
             else
             {
-                lblProId.Text = "Active "+ nowPId.ToString();
+                lblProId.Text = "Active " + nowPId.ToString();
                 lblProId.ForeColor = Color.Green;
             }
 
         }
 
+        public void UpdateImg(Bitmap bt)
+        {
+            if (pibMonster.InvokeRequired)
+            {
+                pibMonster.Invoke(new UpdateBit(UpdateImg), bt);
+            }
+            else
+            {
+                pibMonster.Image = (Image)bt;
+
+                //OutLog(bt.GetPixel(new Random().Next()%30, new Random().Next() % 30).ToString());
+                pibMonster.Update();
+                //bt.Dispose();
+            }
+        }
+
         public void OutLog(String a)
         {
-            if (txtBox.InvokeRequired) {
+            if (txtBox.InvokeRequired)
+            {
                 txtBox.Invoke(new Loge(OutLog), a);
             }
             else { txtBox.Text += a + "\r\n"; }
@@ -76,6 +97,7 @@ namespace DMOAuto
             try
             {
                 int pId = ProcessHandler.GetProcess("GDMO");
+                ProcessHandler.GetMyWindow(nowPId);
             }
             catch (Exception exp)
             {
@@ -83,10 +105,10 @@ namespace DMOAuto
             }
         }
 
-        private void AllStart(object sender,EventArgs e)
+        private void AllStart(object sender, EventArgs e)
         {
-            IntPtr ipt=ProcessHandler.GetMyWindow(nowPId);
-            OutLog("目前控制句柄 " + ipt.ToString());
+            IntPtr ipt = ProcessHandler.GetMyWindow(nowPId);
+            OutLog("目前控制句柄 " + ipt.ToString("x8"));
             bot.Start();
         }
 
@@ -98,9 +120,19 @@ namespace DMOAuto
         private void Mody(object sender, EventArgs e)
         {
             Button bt = (Button)sender;
-            int keycode=-1;
+            int keycode = -1;
             Consts.KEY_CODE.TryGetValue(bt.Text, out keycode);
             bot.cfg.a = keycode;
+        }
+
+        private void SelectMonster(object sender, EventArgs e)
+        {
+
+            Bitmap bt = ProcessHandler.GetWindowImg();
+
+            string str = System.Windows.Forms.Application.StartupPath;
+            UpdateImg(bt.Clone(Consts.MONSTER_RECT, bt.PixelFormat));
+            bt.Dispose();
         }
 
 

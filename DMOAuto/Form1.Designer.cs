@@ -39,6 +39,10 @@
             this.btnStop = new System.Windows.Forms.Button();
             this.btnEnter = new System.Windows.Forms.Button();
             this.txtBox = new System.Windows.Forms.TextBox();
+            this.pibMonster = new System.Windows.Forms.PictureBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.txtCor = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pibMonster)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSearchPro
@@ -62,9 +66,9 @@
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(21, 67);
+            this.btnStart.Location = new System.Drawing.Point(21, 66);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(180, 67);
+            this.btnStart.Size = new System.Drawing.Size(88, 37);
             this.btnStart.TabIndex = 2;
             this.btnStart.Text = "Go";
             this.btnStart.UseVisualStyleBackColor = true;
@@ -72,7 +76,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(104, 180);
+            this.button1.Location = new System.Drawing.Point(104, 190);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 3;
@@ -112,9 +116,9 @@
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(247, 23);
+            this.btnStop.Location = new System.Drawing.Point(115, 66);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(75, 23);
+            this.btnStop.Size = new System.Drawing.Size(83, 37);
             this.btnStop.TabIndex = 7;
             this.btnStop.Text = "Stop";
             this.btnStop.UseVisualStyleBackColor = true;
@@ -133,17 +137,45 @@
             // txtBox
             // 
             this.txtBox.AcceptsReturn = true;
-            this.txtBox.Location = new System.Drawing.Point(438, 139);
+            this.txtBox.Location = new System.Drawing.Point(480, 157);
             this.txtBox.Multiline = true;
             this.txtBox.Name = "txtBox";
             this.txtBox.Size = new System.Drawing.Size(312, 215);
             this.txtBox.TabIndex = 9;
+            // 
+            // pibMonster
+            // 
+            this.pibMonster.Location = new System.Drawing.Point(278, 23);
+            this.pibMonster.Name = "pibMonster";
+            this.pibMonster.Size = new System.Drawing.Size(40, 40);
+            this.pibMonster.TabIndex = 10;
+            this.pibMonster.TabStop = false;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(345, 23);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(57, 63);
+            this.button5.TabIndex = 11;
+            this.button5.Text = "Select Monster";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.SelectMonster);
+            // 
+            // txtCor
+            // 
+            this.txtCor.Location = new System.Drawing.Point(437, 28);
+            this.txtCor.Name = "txtCor";
+            this.txtCor.Size = new System.Drawing.Size(100, 21);
+            this.txtCor.TabIndex = 12;
             // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(804, 425);
+            this.Controls.Add(this.txtCor);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.pibMonster);
             this.Controls.Add(this.txtBox);
             this.Controls.Add(this.btnEnter);
             this.Controls.Add(this.btnStop);
@@ -157,6 +189,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "mainForm";
             this.Text = "DMOAuto";
+            ((System.ComponentModel.ISupportInitialize)(this.pibMonster)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -174,6 +207,9 @@
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnEnter;
         private System.Windows.Forms.TextBox txtBox;
+        private System.Windows.Forms.PictureBox pibMonster;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.TextBox txtCor;
     }
 }
 

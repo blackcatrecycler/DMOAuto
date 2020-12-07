@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -11,43 +12,6 @@ namespace DMOAuto.lib
 {
     class ProcessHandler
     {
-
-
-
-        // Get a handle to an application window.
-        [DllImport("USER32.DLL", CharSet = CharSet.Auto)]
-        private static extern IntPtr FindWindow(string lpClassName,
-        string lpWindowName);
-
-        // Activate an application window.
-        [DllImport("USER32.DLL")]
-        private static extern bool SetForegroundWindow(IntPtr hWnd);
-
-        // Activate an application window.
-        [DllImport("USER32.DLL")]
-        private static extern IntPtr GetForegroundWindow();
-
-        [DllImport("USER32.DLL")]
-        private static extern int GetWindowThreadProcessId(IntPtr hWnd, out int id);
-
-        [DllImport("USER32.DLL")]
-        private static extern IntPtr GetWindow(IntPtr hWnd, uint wCmd);
-
-        [DllImport("USER32.DLL")]
-        private static extern bool IsWindow(IntPtr hWnd);
-
-        private delegate bool CheckWndProcessId(IntPtr hWnd, int id);
-
-        [DllImport("USER32.DLL", CharSet = CharSet.Auto)]
-        private static extern int EnumWindows(CheckWndProcessId hWnd, int lParam);
-
-        [DllImport("User32.dll")]
-        private static extern int PostMessage(IntPtr hWnd, int Msg, int wParam, uint lParam);
-        [DllImport("User32.dll")]
-        private static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, uint lParam);
-
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
-        private static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
 
         public static IntPtr myPtr = IntPtr.Zero;
         public static List<IntPtr> mp = new List<IntPtr>();
@@ -91,7 +55,7 @@ namespace DMOAuto.lib
             int res = GetProcess(pId);
             if (res == -1) { myPtr = IntPtr.Zero; return IntPtr.Zero; }
             //MainForm.gogogo(Process.GetProcessById(pId).ProcessName);
-            res = EnumWindows(CheckWndProcessIdSPEC, res);
+            res = Win32Api.EnumWindows(CheckWndProcessIdSPEC, res);
             return myPtr;
         }
 
@@ -101,16 +65,16 @@ namespace DMOAuto.lib
             int nowid = -1;
             try
             {
-                GetWindowThreadProcessId(hWnd, out nowid);
+                Win32Api.GetWindowThreadProcessId(hWnd, out nowid);
                 if (nowid == id)
                 {
-                    
-                    StringBuilder a = new StringBuilder(1000+1);
-                    GetWindowText(hWnd, a, a.Capacity);
-                    mainForm.uPL(hWnd.ToInt32().ToString("x8") +"  "+a);
+
+                    StringBuilder a = new StringBuilder(1000 + 1);
+                    Win32Api.GetWindowText(hWnd, a, a.Capacity);
+                    //mainForm.uPL(hWnd.ToInt32().ToString("x8") + "  " + a);
                     opc++;
                     if (opc == 1) myPtr = hWnd;
-                    
+
                     return true;
                 }
 
@@ -124,7 +88,7 @@ namespace DMOAuto.lib
 
         private static bool CheckWnd()
         {
-            if (myPtr != IntPtr.Zero || IsWindow(myPtr)) return true;
+            if (myPtr != IntPtr.Zero || Win32Api.IsWindow(myPtr)) return true;
             return false;
         }
 
@@ -134,15 +98,15 @@ namespace DMOAuto.lib
             {
                 if (ifstat)
                 {
-                    SendMessage(myPtr, Consts.WM_ACTIVATEAPP, 1, 0);
-                    SendMessage(myPtr, Consts.WM_ACTIVATE, 2, 0);
-                    SendMessage(myPtr, Consts.WM_IMT_SETCONTEXT, Consts.I_SHOW, Consts.WM_DF);
-                    SendMessage(myPtr, Consts.WM_IMT_NOTIFY, Consts.OPEN_WINDOWS, 0);
+                    Win32Api.SendMessage(myPtr, Consts.WM_ACTIVATEAPP, 1, 0);
+                    Win32Api.SendMessage(myPtr, Consts.WM_ACTIVATE, 2, 0);
+                    Win32Api.SendMessage(myPtr, Consts.WM_IMT_SETCONTEXT, Consts.I_SHOW, Consts.WM_DF);
+                    Win32Api.SendMessage(myPtr, Consts.WM_IMT_NOTIFY, Consts.OPEN_WINDOWS, 0);
                 }
                 else
                 {
-                    SendMessage(myPtr, Consts.WM_IMT_SETCONTEXT, Consts.I_CLOSE, Consts.WM_DF);
-                    SendMessage(myPtr, Consts.WM_IMT_NOTIFY, Consts.CLOSE_WINDOWS, 0);
+                    Win32Api.SendMessage(myPtr, Consts.WM_IMT_SETCONTEXT, Consts.I_CLOSE, Consts.WM_DF);
+                    Win32Api.SendMessage(myPtr, Consts.WM_IMT_NOTIFY, Consts.CLOSE_WINDOWS, 0);
                 }
             }
         }
@@ -153,13 +117,30 @@ namespace DMOAuto.lib
             {
                 AwakeWnd(true);
                 Thread.Sleep(100);
-                PostMessage(myPtr, Consts.WM_KEYDOWN, a,Consts.WM_DD);
-                PostMessage(myPtr, Consts.WM_CHAR, a+32, Consts.WM_DD);
+                Win32Api.PostMessage(myPtr, Consts.WM_KEYDOWN, a, Consts.WM_DD);
+                Win32Api.PostMessage(myPtr, Consts.WM_CHAR, a + 32, Consts.WM_DD);
                 Thread.Sleep(300);
-                PostMessage(myPtr, Consts.WM_KEYUP, a, Consts.WM_DU);
+                Win32Api.PostMessage(myPtr, Consts.WM_KEYUP, a, Consts.WM_DU);
                 Thread.Sleep(100);
                 AwakeWnd(false);
             }
+        }
+
+        public static Bitmap GetWindowImg()
+        {
+            AwakeWnd(true);
+            int a = 0;
+            Bitmap bt = new Bitmap(1000, 200);
+            Graphics gp = Graphics.FromImage(bt);
+            IntPtr imgptr = IntPtr.Zero;
+            gp.Clear(Color.Black);
+            IntPtr gphd = gp.GetHdc();
+            bool x1 = Win32Api.PrintWindow(myPtr, gphd, 0);
+            gp.ReleaseHdc(gphd);
+            gp.Dispose();
+            Thread.Sleep(600);
+            // mainForm.uPL(x1.ToString());
+            return bt;
         }
 
 

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DMOAuto.model;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +28,10 @@ namespace DMOAuto.lib
         public static int CLOSE_WINDOWS = 1;
         public static int I_SHOW = 1;
         public static int I_CLOSE = 0;
+
+        public static Rectangle ALL_RECT = new Rectangle(0, 0, 1000, 200);
+        public static Rectangle MONSTER_RECT = new Rectangle(930, 60, 40, 40);
+        public static Rectangle OBJECT_RECT = new Rectangle(767, 107, 5, 5);
 
         public static Dictionary<String, int> KEY_CODE = new Dictionary<String, int>
         {
