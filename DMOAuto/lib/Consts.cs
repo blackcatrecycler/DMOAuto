@@ -35,13 +35,27 @@ namespace DMOAuto.lib
 
         public static Dictionary<String, int> KEY_CODE = new Dictionary<String, int>
         {
-            { "W",119-32},
+            { "W",119},
+            { "S",115},
+            { "A",97},
+            { "D",100},
+            { "Z",122},
+            { "1",49},
+            { "Enter",13},
+            { "Tab",9}
+        };
+
+        public static Dictionary<String, int> KEY_VALUE = new Dictionary<String, int>
+        {
+            { "W",87},
             { "S",115-32},
             { "A",97-32},
             { "D",100-32},
-            { "Enter",13}
+            { "Z",90},
+            { "1",49},
+            { "Enter",13},
+            { "Tab",9}
         };
 
-
-}
+    }
 }

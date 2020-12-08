@@ -46,5 +46,23 @@ namespace DMOAuto.lib
             }
             return true;
         }
+
+        public static bool MaxSame(Bitmap bt1,Bitmap bt2)
+        {
+            int x = 0;
+            if (bt1.Size.Height * bt1.Size.Width != bt2.Size.Height * bt2.Size.Width) return false;
+            Size s = bt1.Size;
+            for (int i = 0; i < s.Height; i++)
+            {
+                for (int j = 0; j < s.Width; j++)
+                {
+                    int a = bt1.GetPixel(i, j).ToArgb();
+                    int b = bt2.GetPixel(i, j).ToArgb();
+                    if (a == b) x++;
+                }
+            }
+            if (x > s.Width * s.Height*0.3 ) return true;
+            return false;
+        }
     }
 }

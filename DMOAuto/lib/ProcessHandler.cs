@@ -111,16 +111,16 @@ namespace DMOAuto.lib
             }
         }
 
-        public static void SendKey(int a)
+        public static void SendKey(int keycode,int keyvalue)
         {
-            if (CheckWnd() && a != -1)
+            if (CheckWnd())
             {
                 AwakeWnd(true);
                 Thread.Sleep(100);
-                Win32Api.PostMessage(myPtr, Consts.WM_KEYDOWN, a, Consts.WM_DD);
-                Win32Api.PostMessage(myPtr, Consts.WM_CHAR, a + 32, Consts.WM_DD);
-                Thread.Sleep(300);
-                Win32Api.PostMessage(myPtr, Consts.WM_KEYUP, a, Consts.WM_DU);
+                Win32Api.PostMessage(myPtr, Consts.WM_KEYDOWN, keyvalue, 0);
+                Win32Api.PostMessage(myPtr, Consts.WM_CHAR, keycode, 0);
+                Thread.Sleep(100);
+                Win32Api.PostMessage(myPtr, Consts.WM_KEYUP, keyvalue, 0);
                 Thread.Sleep(100);
                 AwakeWnd(false);
             }
@@ -138,7 +138,7 @@ namespace DMOAuto.lib
             bool x1 = Win32Api.PrintWindow(myPtr, gphd, 0);
             gp.ReleaseHdc(gphd);
             gp.Dispose();
-            Thread.Sleep(600);
+            Thread.Sleep(500);
             // mainForm.uPL(x1.ToString());
             return bt;
         }

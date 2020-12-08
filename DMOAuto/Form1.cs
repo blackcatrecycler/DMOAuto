@@ -84,7 +84,11 @@ namespace DMOAuto
             {
                 txtBox.Invoke(new Loge(OutLog), a);
             }
-            else { txtBox.Text += a + "\r\n"; }
+            else {
+                txtBox.Text += a + "\r\n";
+                txtBox.SelectionStart = txtBox.Text.Length;
+                txtBox.ScrollToCaret();
+            }
         }
 
         public static void gogogo(string a)
@@ -129,9 +133,13 @@ namespace DMOAuto
         {
 
             Bitmap bt = ProcessHandler.GetWindowImg();
-
-            string str = System.Windows.Forms.Application.StartupPath;
-            UpdateImg(bt.Clone(Consts.MONSTER_RECT, bt.PixelFormat));
+            Bitmap bbt = bt.Clone(Consts.MONSTER_RECT, bt.PixelFormat);
+            //string path = System.Windows.Forms.Application.StartupPath;
+            //Bitmap bt1 = bt.Clone(Consts.OBJECT_RECT, bt.PixelFormat);
+            //bt1.Save(path + "/1.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+            bot.SetBit(bbt);
+            bot.cfg.monSelect = true;
+            UpdateImg(bbt);
             bt.Dispose();
         }
 
